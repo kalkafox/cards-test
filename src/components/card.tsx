@@ -76,7 +76,8 @@ function Card({
             setFlipped(false)
             //flipRotation.setWithVelocity(90, 0, flipRotation.getVelocity())
           }
-        }}>
+        }}
+      >
         <motion.div
           ref={ref}
           onMouseMove={(e) => {
@@ -111,47 +112,50 @@ function Card({
           style={{
             transformStyle: 'preserve-3d',
             transform,
-          }}>
+          }}
+        >
           {flipped ? (
             <>
-              <div className='absolute heropattern-texture-stone-800 h-full w-full z-20' />
-              <div className='bg-gradient-to-br from-stone-500 to-stone-700 w-full h-full absolute z-10' />
+              <div className="absolute heropattern-texture-stone-800 h-full w-full z-20" />
+              <div className="bg-gradient-to-br from-stone-500 to-stone-700 w-full h-full absolute z-10" />
 
-              <div className='absolute flex justify-center items-center h-full w-full text-stone-100 z-30'>
-                <div className='bg-stone-800 w-20 h-20 rounded-lg absolute'>
+              <div className="absolute flex justify-center items-center h-full w-full text-stone-100 z-30">
+                <div className="bg-stone-800 w-20 h-20 rounded-lg absolute">
                   <Icon
-                    className='absolute left-0 right-0 m-auto bottom-0 top-0'
-                    icon='ion:paw'
-                    width='90%'
-                    height='90%'
+                    className="absolute left-0 right-0 m-auto bottom-0 top-0"
+                    icon="ion:paw"
+                    width="90%"
+                    height="90%"
                   />
                 </div>
               </div>
 
-              <div className='absolute w-full h-full z-20 saturate-0 opacity-40'>
-                <svg viewBox='0 0 160 245' xmlns='http://www.w3.org/2000/svg'>
-                  <filter id='noiseFilter'>
+              <div className="absolute w-full h-full z-20 saturate-0 opacity-40">
+                <svg viewBox="0 0 160 245" xmlns="http://www.w3.org/2000/svg">
+                  <filter id="noiseFilter">
                     <feTurbulence
-                      type='fractalNoise'
-                      baseFrequency='0.65'
-                      numOctaves='5'
-                      stitchTiles='stitch'
+                      type="fractalNoise"
+                      baseFrequency="0.65"
+                      numOctaves="5"
+                      stitchTiles="stitch"
                     />
                   </filter>
 
-                  <rect width='100%' height='100%' filter='url(#noiseFilter)' />
+                  <rect width="100%" height="100%" filter="url(#noiseFilter)" />
                 </svg>
               </div>
             </>
           ) : (
             <>
               <div
-                className={`text-6xl p-2 font-bold absolute select-none ${cardColor}`}>
+                className={`text-6xl p-2 font-bold absolute select-none ${cardColor}`}
+              >
                 {type}
               </div>
               <div
-                className={`justify-center flex items-center h-full ${cardColor}`}>
-                <Icon icon={suit} width='50%' height='50%' />
+                className={`justify-center flex items-center h-full ${cardColor}`}
+              >
+                <Icon icon={suit} width="50%" height="50%" />
               </div>
             </>
           )}

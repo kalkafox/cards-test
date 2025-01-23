@@ -1,12 +1,12 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
 import { type Card as TCard } from '@/types/card'
-import { randomCard } from '@/utils/card'
-import { motion, TargetAndTransition, useSpring } from 'motion/react'
-import Card from './card'
-import { calculateHandValue, GameStep } from '@/utils/blackjack'
-import { useAtom } from 'jotai'
 import { gameCountAtom, gamesLostAtom, gamesWonAtom } from '@/utils/atom'
+import { calculateHandValue, GameStep } from '@/utils/blackjack'
+import { randomCard } from '@/utils/card'
+import { useAtom } from 'jotai'
+import { motion, TargetAndTransition, useSpring } from 'motion/react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import CountUp from 'react-countup'
+import Card from './card'
 
 function Blackjack() {
   const mainULRef = useRef<HTMLUListElement>(null)
@@ -40,11 +40,11 @@ function Blackjack() {
   })
 
   const [animationComplete, setAnimationComplete] = useState<boolean[]>(
-    new Array(mainHand.length).fill(false),
+    new Array(mainHand.length).fill(false)
   )
 
   const [mainFinalYValues, setMainFinalYValues] = useState(
-    mainHand.map(() => Math.floor(Math.random() * 20) - 5),
+    mainHand.map(() => Math.floor(Math.random() * 20) - 5)
   )
 
   // const [dealerFinalYValues, setDealerFinalYValues] = useState(
@@ -165,14 +165,15 @@ function Blackjack() {
 
   return (
     <>
-      <div className='fixed w-full h-full bg-stone-950 heropattern-diagonallines-stone-800/50 -z-20 top-0'></div>
+      <div className="fixed w-full h-full bg-stone-950 heropattern-diagonallines-stone-800/50 -z-20 top-0"></div>
       <motion.ul
         ref={mainULRef}
         className={`fixed flex m-4`}
         style={{
           x: mainHandOffset,
           bottom: 20,
-        }}>
+        }}
+      >
         {mainHand
           ? mainHand.map((item, index, cards) => {
               return (
@@ -233,7 +234,8 @@ function Blackjack() {
                       delay:
                         gameStep === GameStep.PreGame ? index * 0.4 + 0.2 : 0,
                     },
-                  }}>
+                  }}
+                >
                   <Card
                     isFlipped={item.flipped}
                     type={item.type}
@@ -251,7 +253,8 @@ function Blackjack() {
         style={{
           x: dealerHandOffset,
           height: 240,
-        }}>
+        }}
+      >
         {dealerHand.map((item, index, cards) => {
           console.log(cards)
           return (
@@ -281,7 +284,8 @@ function Blackjack() {
                 transition: {
                   delay: gameStep === GameStep.PreGame ? index * 0.4 : 0, // Staggered delay
                 },
-              }}>
+              }}
+            >
               <Card
                 isFlipped={item.flipped}
                 type={item.type}
@@ -292,7 +296,7 @@ function Blackjack() {
         })}
       </motion.ul>
 
-      <div className='bg-stone-800/10 backdrop-blur-lg p-2 rounded-md m-2 w-auto absolute'>
+      <div className="bg-stone-800/10 backdrop-blur-lg p-2 rounded-md m-2 w-auto absolute">
         <div>
           Dealer's score:{' '}
           <CountUp end={dealerScore} preserveValue={true} duration={0.8} />
@@ -315,7 +319,8 @@ function Blackjack() {
             setGameStarted(true)
 
             dealCards()
-          }}>
+          }}
+        >
           Click to start game
         </motion.button>
 
@@ -324,11 +329,12 @@ function Blackjack() {
           animate={{
             opacity: awaitingChoice ? 1 : 0,
             visibility: awaitingChoice ? 'visible' : 'hidden',
-          }}>
+          }}
+        >
           <p>Make a choice</p>
-          <div className='flex gap-4'>
+          <div className="flex gap-4">
             <button
-              className='bg-stone-800 p-2 rounded-md'
+              className="bg-stone-800 p-2 rounded-md"
               disabled={!awaitingChoice}
               onClick={() => {
                 const card = randomCard(false)
@@ -336,17 +342,19 @@ function Blackjack() {
                 setMainHand((prev) => [...prev, card])
 
                 setAwaitingChoice(false)
-              }}>
+              }}
+            >
               Hit
             </button>
             <button
-              className='bg-stone-800 p-2 rounded-md'
+              className="bg-stone-800 p-2 rounded-md"
               disabled={!awaitingChoice}
               onClick={() => {
                 setGameStep(GameStep.PostGame)
 
                 setAwaitingChoice(false)
-              }}>
+              }}
+            >
               Stand
             </button>
           </div>
@@ -354,10 +362,11 @@ function Blackjack() {
 
         <motion.div
           initial={{ opacity: 0, visibility: 'hidden' }}
-          animate={getAnimateState(gameStep === GameStep.Tentative)}>
+          animate={getAnimateState(gameStep === GameStep.Tentative)}
+        >
           <p>Bust :(</p>
           <button
-            className='text-sm w-20'
+            className="text-sm w-20"
             onClick={() => {
               setDealerHand((prev) => {
                 prev[0].flipped = false
@@ -367,14 +376,16 @@ function Blackjack() {
                 setDealerScore(value)
                 return [...prev]
               })
-            }}>
+            }}
+          >
             Click to see the dealer's face-down card (if you're curious)
           </button>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, visibility: 'hidden' }}
-          animate={{ ...getAnimateState(mainScore === 21) }}>
+          animate={{ ...getAnimateState(mainScore === 21) }}
+        >
           Blackjack!
         </motion.div>
 
@@ -382,10 +393,11 @@ function Blackjack() {
           initial={{ opacity: 0, visibility: 'hidden' }}
           animate={{
             ...getAnimateState(
-              mainScore !== 0 && dealerScore !== 0 && mainScore === dealerScore,
+              mainScore !== 0 && dealerScore !== 0 && mainScore === dealerScore
             ),
             transition: { delay: gameStarted ? 500 : 0 },
-          }}>
+          }}
+        >
           Push!
         </motion.div>
 

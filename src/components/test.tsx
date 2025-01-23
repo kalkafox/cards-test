@@ -1,9 +1,9 @@
-import { useState } from 'react'
 import Card from '@/components/card'
 import { type Card as TCard } from '@/types/card'
-import { motion } from 'motion/react'
-import { useAtom } from 'jotai'
 import { deckAtom } from '@/utils/atom'
+import { useAtom } from 'jotai'
+import { motion } from 'motion/react'
+import { useState } from 'react'
 
 function TestComponent() {
   const [flipped, setFlipped] = useState(false)
@@ -25,12 +25,12 @@ function TestComponent() {
   })
 
   const [finalYValues] = useState(
-    cards.map(() => Math.floor(Math.random() * 20) - 5),
+    cards.map(() => Math.floor(Math.random() * 20) - 5)
   )
 
   return (
     <>
-      <div className='fixed w-full h-full bg-stone-950 heropattern-diagonallines-stone-800/50 -z-20 top-0'></div>
+      <div className="fixed w-full h-full bg-stone-950 heropattern-diagonallines-stone-800/50 -z-20 top-0"></div>
       {/* <div className='flex gap-8 m-2'>
         <Card suit={CardSuit.Hearts} type={CardType.King} />
         <Card isFlipped={flipped} />
@@ -41,7 +41,7 @@ function TestComponent() {
         />
         <Card suit={CardSuit.Clubs} type={CardType.Queen} />
       </div> */}
-      <motion.ul className='flex gap-8 justify-center m-4'>
+      <motion.ul className="flex gap-8 justify-center m-4">
         {hand.map((item, index) => (
           <motion.li
             key={`${item.type}-${item.suit}`}
@@ -61,7 +61,8 @@ function TestComponent() {
               rotateY: 0,
               transformStyle: 'unset',
             }}
-            transition={{ delay: index * 0.1 }}>
+            transition={{ delay: index * 0.1 }}
+          >
             <Card isFlipped={flipped} type={item.type} suit={item.suit} />
           </motion.li>
         ))}
@@ -70,7 +71,8 @@ function TestComponent() {
       <button
         onClick={() => {
           setFlipped((val) => !val)
-        }}>
+        }}
+      >
         Click to flip cards
       </button>
     </>

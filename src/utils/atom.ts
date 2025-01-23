@@ -1,7 +1,7 @@
 import { atom } from 'jotai'
-import { newDeck } from './card'
 import { atomWithStorage } from 'jotai/utils'
 import { z } from 'zod'
+import { newDeck } from './card'
 
 export const deckAtom = atom(newDeck())
 
